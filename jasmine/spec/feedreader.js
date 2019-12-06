@@ -17,7 +17,7 @@ $(function() {
          */
         it('are defined', () => {
             expect(allFeeds).toBeDefined();
-            expect(allFeeds.length).not.toBe(0);
+            expect(allFeeds.length).toBeGreaterThan(0);
         });
 
         /* This is a test that loops through each feed
@@ -27,7 +27,7 @@ $(function() {
         it('urls are defined', () => {
             allFeeds.forEach((feed) => {
                 expect(feed.url).toBeDefined();
-                expect(feed.url.length).not.toBe(0);
+                expect(feed.url.length).toBeGreaterThan(0);
             });
         });
 
@@ -38,7 +38,7 @@ $(function() {
         it('names are defined', () => {
             allFeeds.forEach((feed) => {
                 expect(feed.name).toBeDefined();
-                expect(feed.name.length).not.toBe(0);
+                expect(feed.name.length).toBeGreaterThan(0);
             })
         });
     });
@@ -93,23 +93,24 @@ $(function() {
         it('loads and completes its work', () =>
         {
              // Check if there is at least one entry in the loaded feed
-             let feedContainer = document.querySelector('.feed');
-             expect(feedContainer.children.length).toBeGreaterThan(0);
+             let feedEntries = document.querySelectorAll('.feed .entry');
+             expect(feedEntries.length).toBeGreaterThan(0);
         }); 
     });
 
     // Test suite describing async feed loading and that feeds switch
     describe('New Feed Selection', () => {
 
-        // If browser doesn't support ES6 Promises return
-        if(!browserSupportsPromises()) {
-            return;
-        }
+       // If browser doesn't support ES6 Promises return
+       if(!browserSupportsPromises())
+       {
+           return;
+       }
         
-        beforeEach(()=> {
+        beforeEach(() => {
             // Choose fourth feed in allFeeds to load async
             // Return means we await the Promise to resolve
-            return loadFeedAsync(3);
+            return loadFeedAsync(3);         
         });
 
         /* A test that ensures when a new feed is loaded
@@ -117,26 +118,22 @@ $(function() {
          * Remember, loadFeed() is asynchronous.
          */
         it('replaces current feed with new feed\'s entries', () => {
-             // Check if there is at least one entry in the loaded feed
-             let feedContainer = document.querySelector('.feed');
-             expect(feedContainer.children.length).toBeGreaterThan(0);
 
              // Store the first entry for comparison after feed refresh
              // Chceck that the string has content
-             let firstEntry = feedContainer.children[0];
-             expect(firstEntry.innerText.length).not.toBe(0);
+             let firstEntry = document.querySelector('.feed .entry');
+             expect(firstEntry).toBeDefined();
+             expect(firstEntry.innerText.length).toBeGreaterThan(0);
 
              // Refresh the feed container with a new feed async
              // in this case the first feed in allFeeds
              // Return means we await the Promise to resolve
              return loadFeedAsync(0).then(() => {
-                 // Check if there is at least one entry in the newly loaded feed
-                feedContainer = document.querySelector('.feed');
-                expect(feedContainer.children.length).toBeGreaterThan(0);
 
                 // Store new first entry and check the string has content
-                let newFirstEntry = feedContainer.children[0];
-                expect(newFirstEntry.innerText.length).not.toBe(0);
+                let newFirstEntry = document.querySelector('.feed .entry');
+                expect(newFirstEntry).toBeDefined();
+                expect(newFirstEntry.innerText.length).toBeGreaterThan(0);
 
                 // Check that the old first entry does not match the new one
                 expect(firstEntry.innerText).not.toMatch(newFirstEntry.innerText);
