@@ -13,6 +13,6 @@ My version of Udacity's Front-End Web Development Project 4 utilizing JavaScript
 
 ## Post Mortem
 
-This project was pretty straightfoward other than the final two async tests that required Promises. I've dealt with async before in C#, but I really appreciate how Promises and IIFE's make you think about what the async code is doing in a functional way with IIFE's etc. I understand browsers are adding async/await support which hide Promise code underneath, but much like I chose to learn prototypal inheritance before the ES6 class-based looking way, I see the benefit of learning the older callback-way and ES6 Promises.
+This project was pretty straightfoward other than the final two async tests that required Promises. I've dealt with async before in C#, but I really appreciate how Promises and IIFE's make you think about what the async code is doing in a functional way. I understand browsers are adding async/await support which hide Promise code underneath, but much like I chose to learn prototypal inheritance before the ES6 class-based looking way, I see the benefit of learning the older callback-way and ES6 Promises.
 
 ### Jacob Anderson
